@@ -17,6 +17,14 @@ const routes = [{
 				}
 			},
 			{
+				path: 'study',
+				component: () => import('../views/Study.vue'),
+				name: 'study',
+				meta: {
+					title: '学习中心'
+				}
+			},
+			{
 				path: 'practice',
 				name: 'Practice',
 				component: () => import('../views/Practice.vue'),

@@ -24,7 +24,7 @@ from question.views import ChoiceListViewSet, FillListViewSet, JudgeListViewSet,
 from record.views import ChoiceRecordListViewSet, FillRecordListViewSet, JudgeRecordListViewSet, \
     ProgramRecordListViewSet
 from user.views import RegisterViewSet, StudentViewSet, UpdatePwdApi, ClazzListViewSet
-
+from study.views import StudyListViewSet,get_content
 router = DefaultRouter()
 
 # 配置exams的url
@@ -42,6 +42,7 @@ router.register(r'records/choices', ChoiceRecordListViewSet)
 router.register(r'records/fills', FillRecordListViewSet)
 router.register(r'records/judges', JudgeRecordListViewSet)
 router.register(r'records/programs', ProgramRecordListViewSet)
+router.register(r'studies', StudyListViewSet)
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
@@ -50,5 +51,6 @@ urlpatterns = [
     path('jwt-auth/', obtain_jwt_token),
     path('check-program/', CheckProgramApi.as_view()),
     path('update-pwd/', UpdatePwdApi.as_view()),
+    path("content/", get_content),
     re_path('^', include(router.urls))
 ]
