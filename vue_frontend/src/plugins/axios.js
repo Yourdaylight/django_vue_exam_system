@@ -12,6 +12,9 @@ let config = {
   // baseURL: process.env.baseURL || process.env.apiUrl || ""
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
+  headers:{
+    "X-CSRFToken": document.cookie.match("(^|;)\\s*" + "csrftoken" + "\\s*=\\s*([^;]+)")?.pop()
+  }
 };
 
 const _axios = axios.create(config);
@@ -23,6 +26,7 @@ _axios.interceptors.request.use(
 	if (localStorage.getItem('Authorization')) {
 	      config.headers.Authorization = localStorage.getItem('Authorization');
 	    }
+
     return config;
   },
   function(error) {

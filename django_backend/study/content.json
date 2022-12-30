@@ -1,49 +1,31 @@
 [
   {
     "id": 1,
-    "label": "一级 1",
+    "label": "Python\u7f16\u7a0b\u57fa\u7840",
     "children": [
       {
         "id": 4,
-        "label": "二级 1-1",
+        "label": "\u7b2c\u4e00\u7ae0 \u521d\u59cbPython",
         "children": [
           {
             "id": 9,
-            "label": "三级 1-1-1"
+            "label": "\u4e09\u7ea7 1-1-1"
           },
           {
             "id": 10,
-            "label": "三级 1-1-2"
+            "label": "\u4e09\u7ea7 1-1-2"
+          },
+          {
+            "id": 10001,
+            "label": "\u65b0\u7684\u7ae0\u8282",
+            "children": []
           }
         ]
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "label": "一级 2",
-    "children": [
-      {
-        "id": 5,
-        "label": "二级 2-1"
       },
       {
-        "id": 6,
-        "label": "二级 2-2"
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "label": "一级 3",
-    "children": [
-      {
-        "id": 7,
-        "label": "二级 3-1"
-      },
-      {
-        "id": 8,
-        "label": "二级 3-2"
+        "id": 1000,
+        "label": "\u7b2c\u4e8c\u7ae0 Python\u53d8\u91cf",
+        "children": []
       }
     ]
   }

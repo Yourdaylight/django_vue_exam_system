@@ -4,9 +4,11 @@ from exam.models import Practice
 from exam.serializers import PracticeSerializer
 from question.models import Choice, Fill, Judge, Program
 from question.serializers import ChoiceSerializer, FillSerializer, JudgeSerializer, ProgramSerializer
-from record.models import ChoiceRecord, FillRecord, ProgramRecord, JudgeRecord
+from record.models import ChoiceRecord, FillRecord, ProgramRecord, JudgeRecord, StudyRecord
 from user.models import Student
 from user.serializers import StudentSerializer
+from study.models import Study
+from study.serializers import StudySerializer
 
 
 class ChoiceRecordSerializer(serializers.ModelSerializer):
@@ -74,4 +76,19 @@ class ProgramRecordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProgramRecord
+        fields = '__all__'
+
+
+class StudyRecordSerializer(serializers.ModelSerializer):
+    # 覆盖外键字段 只读
+    practice = PracticeSerializer(read_only=True)
+    student = StudentSerializer(read_only=True)
+
+    # 用于创建的只写字段
+    study_id = serializers.PrimaryKeyRelatedField(queryset=Study.objects.all(), source='study',
+                                                  write_only=True)
+    student_id = serializers.PrimaryKeyRelatedField(queryset=Student.objects.all(), source='student', write_only=True)
+
+    class Meta:
+        model = StudyRecord
         fields = '__all__'

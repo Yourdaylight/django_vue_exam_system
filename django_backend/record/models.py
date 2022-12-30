@@ -4,6 +4,7 @@ from django.db import models
 from exam.models import Practice
 from question.models import Choice, Fill, Judge, Program
 from user.models import Student
+from study.models import Study
 
 
 class Record(models.Model):
@@ -57,3 +58,16 @@ class ProgramRecord(Record):
         ordering = ['id']
         verbose_name = '编程题答题记录'
         verbose_name_plural = verbose_name
+
+
+# 学习内容记录
+class StudyRecord(models.Model):
+    student = models.ForeignKey(Student, verbose_name="学生", on_delete=models.CASCADE)
+    study_time = models.DateTimeField("学习时间", auto_now_add=True)
+    study_id = models.ForeignKey(Study, verbose_name="学习内容", on_delete=models.CASCADE)
+    study_times = models.IntegerField("学习次数", default=0)
+    class Meta:
+        ordering = ['id']
+        verbose_name = '学习内容记录'
+        verbose_name_plural = verbose_name
+

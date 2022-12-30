@@ -22,9 +22,10 @@ from rest_framework_jwt.views import obtain_jwt_token
 from exam.views import GradeListViewSet, ExamListViewSet, PracticeListViewSet
 from question.views import ChoiceListViewSet, FillListViewSet, JudgeListViewSet, ProgramListViewSet, CheckProgramApi
 from record.views import ChoiceRecordListViewSet, FillRecordListViewSet, JudgeRecordListViewSet, \
-    ProgramRecordListViewSet
+    ProgramRecordListViewSet, StudyRecordListViewSet
 from user.views import RegisterViewSet, StudentViewSet, UpdatePwdApi, ClazzListViewSet
-from study.views import StudyListViewSet,get_content
+from study.views import StudyListViewSet, ContentView, LearnView
+
 router = DefaultRouter()
 
 # 配置exams的url
@@ -42,6 +43,7 @@ router.register(r'records/choices', ChoiceRecordListViewSet)
 router.register(r'records/fills', FillRecordListViewSet)
 router.register(r'records/judges', JudgeRecordListViewSet)
 router.register(r'records/programs', ProgramRecordListViewSet)
+router.register(r'records/study', StudyRecordListViewSet)
 router.register(r'studies', StudyListViewSet)
 
 urlpatterns = [
@@ -51,6 +53,7 @@ urlpatterns = [
     path('jwt-auth/', obtain_jwt_token),
     path('check-program/', CheckProgramApi.as_view()),
     path('update-pwd/', UpdatePwdApi.as_view()),
-    path("content/", get_content),
+    path("content/", ContentView.as_view()),  # 学习内容的目录
+    path("learn/", LearnView.as_view()),  # 章节对应的学习内容
     re_path('^', include(router.urls))
 ]

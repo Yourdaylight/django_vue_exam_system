@@ -4,9 +4,9 @@ from django.shortcuts import render
 from rest_framework import mixins, viewsets
 
 from question.models import Program
-from record.models import ChoiceRecord, FillRecord, JudgeRecord, ProgramRecord
+from record.models import ChoiceRecord, FillRecord, JudgeRecord, ProgramRecord, StudyRecord
 from record.serializers import ChoiceRecordSerializer, FillRecordSerializer, JudgeRecordSerializer, \
-    ProgramRecordSerializer
+    ProgramRecordSerializer, StudyRecordSerializer
 
 
 class ChoiceRecordListViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
@@ -66,4 +66,19 @@ class ProgramRecordListViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, v
         practice_id = self.request.query_params.get('practice_id')
         if practice_id:
             self.queryset = ProgramRecord.objects.filter(practice_id=practice_id)
+        return self.queryset
+
+
+class StudyRecordListViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
+    """学习记录"""
+    # 数据集
+    queryset = StudyRecord.objects.all()
+    # 序列化
+    serializer_class = StudyRecordSerializer
+
+    def get_queryset(self):
+        # 学习id
+        practice_id = self.request.query_params.get('study_id')
+        if practice_id:
+            self.queryset = StudyRecord.objects.filter(study_id=practice_id)
         return self.queryset

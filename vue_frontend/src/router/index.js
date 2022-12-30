@@ -29,7 +29,7 @@ const routes = [{
 				name: 'Practice',
 				component: () => import('../views/Practice.vue'),
 				meta: {
-					title: '模拟练习'
+					title: '自适应练习'
 				}
 			},
 			{

@@ -23,9 +23,10 @@ class ChoiceListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         # 题目数量
         choice_number = int(self.request.query_params.get("choice_number"))
         level = int(self.request.query_params.get("level", 1))
+        point = self.request.query_params.get("point", "")
 
         if choice_number:
-            self.queryset = Choice.objects.all().filter(level=level).order_by('?')[:choice_number]
+            self.queryset = Choice.objects.all().filter(level=level, point__contains=point).order_by('?')[:choice_number]
         return self.queryset
 
 
@@ -41,9 +42,10 @@ class FillListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         # 题目数量
         fill_number = int(self.request.query_params.get("fill_number"))
         level = int(self.request.query_params.get("level", 1))
+        point = self.request.query_params.get("point", "")
 
         if fill_number:
-            self.queryset = Fill.objects.all().filter(level=level).order_by('?')[:fill_number]
+            self.queryset = Fill.objects.all().filter(level=level, point__contains=point).order_by('?')[:fill_number]
         return self.queryset
 
 
@@ -59,9 +61,10 @@ class JudgeListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         # 题目数量
         judge_number = int(self.request.query_params.get("judge_number"))
         level = int(self.request.query_params.get("level", 1))
+        point = self.request.query_params.get("point", "")
 
         if judge_number:
-            self.queryset = Judge.objects.all().filter(level=level).order_by('?')[:judge_number]
+            self.queryset = Judge.objects.all().filter(level=level, point__contains=point).order_by('?')[:judge_number]
         return self.queryset
 
 

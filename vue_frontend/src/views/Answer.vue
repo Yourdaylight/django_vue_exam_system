@@ -32,7 +32,7 @@
 						</el-col>
 
 					</el-row>
-					<el-divider content-position="center">编程题</el-divider>
+
 					<el-row class="question-tag">
 						<el-col :span="24">
 							<el-tag v-for="(item, index) in programs" :key="item.id" :type="index + programPos == current ? 'success' : ''"
@@ -291,7 +291,7 @@
 				this.current = number
 				//如果是编程题，第一次加载答题模板
 				this.loadProgram();
-			},	
+			},
 			// 第一次加载编程题答题模板
 			loadProgram() {
 				let index = this.current - parseInt(this.programPos)
@@ -350,11 +350,11 @@
 							your_answer: this.answer[0][i]
 						}).then(res => {
 							console.log(res); //处理成功的函数 相当于success
-						
+
 						}).catch(function(error) {
 							console.log(error) //错误处理 相当于error
 						});
-					}	
+					}
 					//判断是否正确
 					if (this.choices[i].right_answer == this.answer[0][i]) {
 						this.totalScore += this.choices[i].score;
@@ -373,11 +373,11 @@
 							your_answer: this.answer[1][i]
 						}).then(res => {
 							console.log(res); //处理成功的函数 相当于success
-						
+
 						}).catch(function(error) {
 							console.log(error) //错误处理 相当于error
 						});
-					}	
+					}
 					//判断是否正确
 					if (this.fills[i].right_answer == this.answer[1][i]) {
 						this.totalScore += this.fills[i].score;
@@ -396,11 +396,11 @@
 							your_answer: this.answer[2][i]
 						}).then(res => {
 							console.log(res); //处理成功的函数 相当于success
-						
+
 						}).catch(function(error) {
 							console.log(error) //错误处理 相当于error
 						});
-					}	
+					}
 					//判断是否正确
 					if (this.judges[i].right_answer == this.answer[2][i]) {
 						this.totalScore += this.judges[i].score;
@@ -428,7 +428,7 @@
 								cmd_msg: res.data.message
 							}).then(res => {
 								console.log(res); //处理成功的函数 相当于success
-							
+
 							}).catch(function(error) {
 								console.log(error) //错误处理 相当于error
 							});
@@ -442,7 +442,7 @@
 			handIn() {
 				this.goOverPaper();
 				const temp = this
-				clearTimeout(this.timer); //清除延迟执行 
+				clearTimeout(this.timer); //清除延迟执行
 				this.timer = setTimeout(() => { //设置延迟执行
 					if (this.isPractice == true) {
 						this.$message({
@@ -467,7 +467,7 @@
 						}).catch(function(error) {
 							//错误处理 相当于error
 						})
-			
+
 					}
 				}, 1000);
 			}

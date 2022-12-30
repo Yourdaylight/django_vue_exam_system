@@ -26,7 +26,7 @@ class Choice(models.Model):
     analysis = models.TextField("题目解析", default="暂无")
     score = models.PositiveSmallIntegerField("分值", default=2)
     level = models.CharField("难度等级", max_length=1, choices=LEVEL_CHOICES, default='1')
-
+    point = models.CharField("知识点", max_length=200, default="")
     class Meta:
         ordering = ['id']
         verbose_name = '选择题'
@@ -50,7 +50,7 @@ class Fill(models.Model):
     analysis = models.TextField("题目解析", default="暂无")
     score = models.PositiveSmallIntegerField("分值", default=2)
     level = models.CharField("难度等级", max_length=1, choices=LEVEL_CHOICES, default='1')
-
+    point = models.CharField("知识点", max_length=200, default="")
     class Meta:
         ordering = ['id']
         verbose_name = '填空题'
@@ -78,7 +78,7 @@ class Judge(models.Model):
     analysis = models.TextField("题目解析", default="暂无")
     score = models.PositiveSmallIntegerField("分值", default=2)
     level = models.CharField("难度等级", max_length=1, choices=LEVEL_CHOICES, default='1')
-
+    point = models.CharField("知识点", max_length=200, default="")
     class Meta:
         ordering = ['id']
         verbose_name = '判断题'
@@ -103,7 +103,7 @@ class Program(models.Model):
     analysis = models.TextField("题目解析", default="")
     score = models.PositiveSmallIntegerField("分值", default=8)
     level = models.CharField("难度等级", max_length=1, choices=LEVEL_CHOICES, default='1')
-
+    point = models.CharField("知识点", max_length=200, default="")
     class Meta:
         ordering = ['id']
         verbose_name = '编程题'

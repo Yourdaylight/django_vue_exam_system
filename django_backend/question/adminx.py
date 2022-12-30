@@ -52,4 +52,4 @@ class ProgramAdmin(object):
 xadmin.site.register(Choice, ChoiceAdmin)
 xadmin.site.register(Fill, FillAdmin)
 xadmin.site.register(Judge, JudgeAdmin)
-xadmin.site.register(Program, ProgramAdmin)
+# xadmin.site.register(Program, ProgramAdmin)

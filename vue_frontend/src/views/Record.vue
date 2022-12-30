@@ -104,7 +104,7 @@
 			this.getChoiceRecordInfo();
 			this.getFillRecordInfo();
 			this.getJudgeRecordInfo();
-			this.getProgramRecordInfo();
+			// this.getProgramRecordInfo();
 		},
 		methods: {
 			//获取选择题练习记录
@@ -185,7 +185,7 @@
 		text-align: left;
 		margin-left: 200px;
 	}
-	
+
 	.el-input {
 		max-width: 800px;
 	}
