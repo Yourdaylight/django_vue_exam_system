@@ -212,7 +212,8 @@
 				this.$axios(`/api/choices/?format=json`, {
 					params: {
 						choice_number: this.getPaper.choice_number,
-						level: this.getPaper.level
+						level: this.getPaper.level,
+            student_id: this.$store.state.student.id,
 					}
 				}).then(res => {
 					this.choices = res.data
@@ -226,7 +227,8 @@
 				this.$axios('/api/fills/?format=json', {
 					params: {
 						fill_number: this.getPaper.fill_number,
-						level: this.getPaper.level
+						level: this.getPaper.level,
+            student_id: this.$store.state.student.id,
 					}
 				}).then(res => {
 					this.fills = res.data
@@ -240,7 +242,8 @@
 				this.$axios(`/api/judges/?format=json`, {
 					params: {
 						judge_number: this.getPaper.judge_number,
-						level: this.getPaper.level
+						level: this.getPaper.level,
+            student_id: this.$store.state.student.id,
 					}
 				}).then(res => {
 					this.judges = res.data
@@ -254,7 +257,8 @@
 				this.$axios(`/api/programs/?format=json`, {
 					params: {
 						program_number: this.getPaper.program_number,
-						level: this.getPaper.level
+						level: this.getPaper.level,
+            student_id: this.$store.state.student.id,
 					}
 				}).then(res => {
 					this.programs = res.data

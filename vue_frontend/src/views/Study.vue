@@ -10,15 +10,32 @@
                   text-decoration: underline">
           章节目录(推荐列表)
         </a>
+        <!--        <el-tree-->
+        <!--            :data="data"-->
+        <!--            show-checkbox-->
+        <!--            node-key="id"-->
+        <!--            default-expand-all-->
+        <!--            :expand-on-click-node="false"-->
+        <!--            :render-content="renderContent"-->
+        <!--            style="margin-top: 10px"-->
+        <!--        >-->
+        <!--        </el-tree>-->
         <el-tree
             :data="data"
             show-checkbox
             node-key="id"
             default-expand-all
-            :expand-on-click-node="false"
-            :render-content="renderContent"
-            style="margin-top: 10px"
-        >
+            :expand-on-click-node="true">
+          <span class="custom-tree-node" slot-scope="{ node, data }">
+            <span>
+              <el-button type="text" @click="getLearnContentById(node.data)">{{ node.label }}</el-button>
+            </span>
+            <span v-show="showOperate">
+              <el-button size="mini" type="text" @click="append(data)" icon="el-icon-plus"></el-button>
+              <el-button size="mini" type="text" @click="remove(node, data)" icon="el-icon-minus"></el-button>
+              <el-button size="mini" type="text" @click="changeVisible(node.data)" icon="el-icon-edit"></el-button>
+            </span>
+          </span>
         </el-tree>
         <el-button type="primary" @click="saveContent">保存</el-button>
       </div>
@@ -106,13 +123,15 @@ export default {
         content: ''
       },
       showTable: true,
-      tableData: []
+      tableData: [],
+      showOperate: false
     }
   },
 
   //界面创建时请求接口获取目录树
   created() {
     this.getTree();
+    this.showOperate = this.$store.state.student.name==='admin';
   },
   methods: {
     //修改showTable状态
@@ -132,6 +151,7 @@ export default {
 
     //点击目录树的节点时，获取对应的内容
     getLearnContentById(nodeData) {
+      console.log("nodeData", nodeData);
       this.currentName = nodeData.label;
       this.currentId = nodeData.id;
       this.$axios({
@@ -158,6 +178,17 @@ export default {
         }
       }).then((res) => {
         console.log("post的返回值", res.data)
+        //弹框显示保存成功
+        this.$message({
+          message: '保存成功',
+          type: 'success'
+        });
+        //构建nodeData调用getLearnContentById
+        let nodeData = {
+          id: this.currentId,
+          label: this.currentName
+        }
+        this.getLearnContentById(nodeData)
       })
     },
 
@@ -206,20 +237,6 @@ export default {
       this.dialogVisible = !this.dialogVisible;
     },
 
-
-    renderContent(h, {node, data, store}) {
-      return (
-          <span class="custom-tree-node">
-            <span>
-              <el-button type="text" on-click={() => this.getLearnContentById(node.data)}>{node.label}</el-button>
-            </span>
-            <span>
-              <el-button size="mini" type="text" on-click={() => this.append(data)} icon="el-icon-plus"></el-button>
-              <el-button size="mini" type="text" on-click={() => this.remove(node, data)} icon="el-icon-minus"></el-button>
-              <el-button size="mini" type="text" on-click={() => this.changeVisible(node.data)} icon="el-icon-edit"></el-button>
-            </span>
-          </span>);
-    }
   }
 };
 </script>

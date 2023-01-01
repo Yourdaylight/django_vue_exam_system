@@ -49,16 +49,14 @@ class ContentView(APIView):
         # 在studyRecord中查询学生的学习记录
         study_record = StudyRecord.objects.filter(student_id=student_id)
         for item in wrap_content:
+            item["is_study"] = False
+            item["study_times"] = 0
+            item["study_time"] = "--"
             for record in study_record:
                 if item.get("id") == record.study_id_id:
                     item["is_study"] = True
                     item["study_times"] = record.study_times
                     item["study_time"] = record.study_time
-                else:
-                    item["is_study"] = False
-                    item["study_times"] = 0
-                    item["study_time"] = "--"
-
         # 将wrap_content根据study_time和study_times排序
         wrap_content = sorted(wrap_content, key=lambda x: (x["study_times"], x["id"]), reverse=True)
         res = {

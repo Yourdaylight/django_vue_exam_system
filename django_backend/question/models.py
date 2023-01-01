@@ -104,6 +104,7 @@ class Program(models.Model):
     score = models.PositiveSmallIntegerField("分值", default=8)
     level = models.CharField("难度等级", max_length=1, choices=LEVEL_CHOICES, default='1')
     point = models.CharField("知识点", max_length=200, default="")
+
     class Meta:
         ordering = ['id']
         verbose_name = '编程题'

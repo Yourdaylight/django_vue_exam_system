@@ -4,7 +4,9 @@ import copy
 from crispy_forms.utils import TEMPLATE_PACK
 from django import forms
 from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import PermissionDenied, FieldError
+from django.core.exceptions import PermissionDenied, FieldError,FieldDoesNotExist
+#引入fieldDoseNotExist
+
 from django.db import models, transaction
 from django.forms.models import modelform_factory, modelform_defines_fields
 from django.http import Http404, HttpResponseRedirect
@@ -383,7 +385,7 @@ class CreateAdminView(ModelFormAdminView):
             for k in initial:
                 try:
                     f = self.opts.get_field(k)
-                except django.core.exceptions.FieldDoesNotExist:
+                except FieldDoesNotExist:
                     continue
                 if isinstance(f, models.ManyToManyField):
                     initial[k] = initial[k].split(",")
